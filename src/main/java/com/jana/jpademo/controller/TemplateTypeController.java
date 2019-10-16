@@ -1,29 +1,44 @@
 package com.jana.jpademo.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.jana.jpademo.model.TemplateType;
 import com.jana.jpademo.service.TemplateTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.jana.jpademo.vo.AuthTemplateVO;
 
 /**
  * Created by Jana on 10/15/2019.
  */
 @RestController
-@RequestMapping("/getTemplateType")
+@RequestMapping("/template")
 public class TemplateTypeController {
 
-    @Autowired
-    TemplateTypeService service;
+	@Autowired
+	TemplateTypeService service;
 
-    @PostMapping
-    public void saveOrUpdateTemplateType(@RequestBody TemplateType templateType) {
-        service.saveOrUpdate(templateType);
-    }
+	@PostMapping("/addTemplateType")
+	public void saveOrUpdateTemplateType(@RequestBody TemplateType templateType) {
+		service.saveOrUpdate(templateType);
+	}
 
-    @GetMapping
-    public List<TemplateType> getTemplateTypes() {
-        return service.getAllTemplateType();
-    }
+	@GetMapping("/getTemplateType")
+	public List<TemplateType> getTemplateTypes() {
+		return service.getAllTemplateType();
+	}
+
+	@GetMapping("/getTemplate")
+	public AuthTemplateVO getTemplateDetails(@RequestParam("publicationTypeID") String publicationTypeID,
+			@RequestParam(required = false) String publicationNameID,
+			@RequestParam(required = false) String articleTypeID) {
+		System.out.println("publicationNameID" + publicationNameID);
+		return service.getAuthTemplate(publicationTypeID, publicationNameID, articleTypeID);
+	}
 }
