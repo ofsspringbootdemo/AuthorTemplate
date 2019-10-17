@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class FileDownload {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 
