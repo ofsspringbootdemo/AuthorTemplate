@@ -15,8 +15,7 @@ import java.util.List;
 public class TemplateName {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "templateNameSeqGenerator")
-    @SequenceGenerator(name="templateNameSeqGenerator", sequenceName = "TEMPLATE_NAME_SEQ", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
@@ -46,7 +45,6 @@ public class TemplateName {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "TEMPLATE_TYPE_ID")
     private TemplateType templateType;
 
     @OneToMany(cascade = CascadeType.ALL)

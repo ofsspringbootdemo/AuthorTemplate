@@ -10,8 +10,7 @@ import javax.persistence.*;
 public class FileDownload {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fileDownloadSeqGenerator")
-    @SequenceGenerator(name="fileDownloadSeqGenerator", sequenceName = "FILE_DOWNLOAD_SEQ", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
