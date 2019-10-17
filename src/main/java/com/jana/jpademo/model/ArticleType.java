@@ -13,8 +13,9 @@ import java.util.List;
 @Table(name = "ARTICLE_TYPE")
 public class ArticleType {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "articleTypeSeqGenerator")
+    @SequenceGenerator(name="articleTypeSeqGenerator", sequenceName = "ARTICLE_TYPE_SEQ", allocationSize=1)
     @Column(name = "ID")
     private Long id;
 
