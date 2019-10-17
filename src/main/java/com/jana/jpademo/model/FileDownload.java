@@ -9,8 +9,9 @@ import javax.persistence.*;
 @Table(name = "FILE_DOWNLOAD")
 public class FileDownload {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fileDownloadSeqGenerator")
+    @SequenceGenerator(name="fileDownloadSeqGenerator", sequenceName = "FILE_DOWNLOAD_SEQ", allocationSize=1)
     @Column(name = "ID")
     private Long id;
 

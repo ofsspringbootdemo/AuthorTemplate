@@ -13,8 +13,9 @@ import java.util.List;
 @Table(name = "TEMPLATE_TYPE")
 public class TemplateType {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "templateTypeSeqGenerator")
+    @SequenceGenerator(name="templateTypeSeqGenerator", sequenceName = "TEMPLATE_TYPE_SEQ", allocationSize=1)
     @Column(name = "ID")
     private Long id;
 
@@ -44,7 +45,6 @@ public class TemplateType {
     private List<FileDownload> fileDownloadList;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "TEMPLATE_TYPE_ID")
     @JsonManagedReference
     private List<TemplateName> templateNameList;
 
