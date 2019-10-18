@@ -1,5 +1,7 @@
 package com.jana.jpademo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 /**
@@ -22,6 +24,18 @@ public class FileDownload {
 
     @Column(name = "DESCRIPTIVE_TEXT")
     private String descriptiveText;
+
+    @ManyToOne
+    @JsonBackReference
+    private TemplateType templateType;
+
+    @ManyToOne
+    @JsonBackReference
+    private TemplateName templateName;
+
+    @ManyToOne
+    @JsonBackReference
+    private ArticleType articleType;
 
     public Long getId() {
         return id;
@@ -53,5 +67,29 @@ public class FileDownload {
 
     public void setDescriptiveText(String descriptiveText) {
         this.descriptiveText = descriptiveText;
+    }
+
+    public TemplateType getTemplateType() {
+        return templateType;
+    }
+
+    public void setTemplateType(TemplateType templateType) {
+        this.templateType = templateType;
+    }
+
+    public TemplateName getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(TemplateName templateName) {
+        this.templateName = templateName;
+    }
+
+    public ArticleType getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(ArticleType articleType) {
+        this.articleType = articleType;
     }
 }

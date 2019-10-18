@@ -144,3 +144,12 @@ select * from template_type;
 select * from template_name;
 select * from Article_type;
 select * from FILE_DOWNLOAD;
+
+End points to validate
+=======================
+http://localhost:8001/templateType
+http://localhost:8001/template/getTemplateByTemplateType?templateTypeID=4
+http://localhost:8001/template/getTemplateByTemplateName?templateNameID=4
+http://localhost:8001/template/getFileDownloadByTemplateType?id=1
+http://localhost:8001/template/getFileDownloadByTemplateName?id=2
+http://localhost:8001/template/getFileDownloadByArticleType?id=3

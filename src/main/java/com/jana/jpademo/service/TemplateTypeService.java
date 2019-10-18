@@ -15,7 +15,7 @@ import java.util.Optional;
 public class TemplateTypeService {
 
     @Autowired
-    TemplateTypeRepository repository;
+    private TemplateTypeRepository repository;
 
     public void saveOrUpdate(TemplateType templateType) {
         repository.save(templateType);

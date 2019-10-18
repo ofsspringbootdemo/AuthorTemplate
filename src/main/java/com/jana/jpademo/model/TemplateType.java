@@ -1,5 +1,6 @@
 package com.jana.jpademo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "TEMPLATE_TYPE")
+@JsonIgnoreProperties(value = {"templateNameList", "fileDownloadList"}, allowSetters = true)
 public class TemplateType {
 
     @Id
@@ -41,6 +43,7 @@ public class TemplateType {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "TEMPLATE_TYPE_ID")
+    @JsonManagedReference
     private List<FileDownload> fileDownloadList;
 
     @OneToMany(cascade = CascadeType.ALL)
