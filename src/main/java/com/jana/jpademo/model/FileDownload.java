@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class FileDownload {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 
@@ -22,6 +22,39 @@ public class FileDownload {
 
 	@Column(name = "DESCRIPTIVE_TEXT")
 	private String descriptiveText;
+
+	@Column(name = "TEMPLATE_TYPE_ID")
+	private long templateTypeID;
+
+	@Column(name = "TEMPLATE_NAME_ID")
+	private long templateNameID;
+
+	@Column(name = "ARTICLE_TYPE_ID")
+	private long articleTypeID;
+
+	public long getTemplateTypeID() {
+		return templateTypeID;
+	}
+
+	public void setTemplateTypeID(long templateTypeID) {
+		this.templateTypeID = templateTypeID;
+	}
+
+	public long getTemplateNameID() {
+		return templateNameID;
+	}
+
+	public void setTemplateNameID(long templateNameID) {
+		this.templateNameID = templateNameID;
+	}
+
+	public long getArticleTypeID() {
+		return articleTypeID;
+	}
+
+	public void setArticleTypeID(long articleTypeID) {
+		this.articleTypeID = articleTypeID;
+	}
 
 	public Long getId() {
 		return id;

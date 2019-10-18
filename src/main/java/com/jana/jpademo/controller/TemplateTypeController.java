@@ -35,10 +35,10 @@ public class TemplateTypeController {
 	}
 
 	@GetMapping("/getTemplate")
-	public AuthTemplateVO getTemplateDetails(@RequestParam("publicationTypeID") String publicationTypeID,
-			@RequestParam(required = false) String publicationNameID,
+	public AuthTemplateVO getTemplateDetails(@RequestParam(required = false) String templateTypeID,
+			@RequestParam(required = false) String templateNameID,
 			@RequestParam(required = false) String articleTypeID) {
-		System.out.println("publicationNameID" + publicationNameID);
-		return service.getAuthTemplate(publicationTypeID, publicationNameID, articleTypeID);
+		System.out.println("publicationNameID" + templateNameID);
+		return service.getAuthTemplate(templateTypeID, templateNameID, articleTypeID);
 	}
 }

@@ -10,12 +10,13 @@ public class AuthTemplateVO {
 	private List<TemplateName> templateName;
 	private List<ArticleType> articleType;
 	private List<FileDownload> download;
+	private ErrMessageVO errMsgDtls;
 
-	public List<TemplateName> getPublicationName() {
+	public List<TemplateName> getTemplateName() {
 		return templateName;
 	}
 
-	public void setPublicationName(List<TemplateName> templateName) {
+	public void setTemplateName(List<TemplateName> templateName) {
 		this.templateName = templateName;
 	}
 
@@ -35,4 +36,11 @@ public class AuthTemplateVO {
 		this.download = download;
 	}
 
+	public ErrMessageVO getErrMsgDtls() {
+		return errMsgDtls;
+	}
+
+	public void setErrMsgDtls(ErrMessageVO errMsgDtls) {
+		this.errMsgDtls = errMsgDtls;
+	}
 }

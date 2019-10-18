@@ -1,6 +1,7 @@
 package com.jana.jpademo.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,10 +13,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "TEMPLATE_NAME")
+@JsonIgnoreProperties(value = { "articleTypeList", "fileDownloadList" }, allowSetters = true)
 public class TemplateName {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 
