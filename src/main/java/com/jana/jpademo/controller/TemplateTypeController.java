@@ -1,17 +1,16 @@
 package com.jana.jpademo.controller;
 
-import com.jana.jpademo.model.ArticleType;
-import com.jana.jpademo.model.FileDownload;
-import com.jana.jpademo.model.TemplateName;
-import com.jana.jpademo.model.TemplateType;
-import com.jana.jpademo.service.ArticleTypeService;
-import com.jana.jpademo.service.FileDownloadService;
-import com.jana.jpademo.service.TemplateNameService;
-import com.jana.jpademo.service.TemplateTypeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.jana.jpademo.model.TemplateType;
+import com.jana.jpademo.service.TemplateTypeService;
 
 /**
  * Created by Jana on 10/15/2019.
