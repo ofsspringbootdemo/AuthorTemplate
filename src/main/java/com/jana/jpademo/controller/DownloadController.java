@@ -27,7 +27,7 @@ public class DownloadController {
 	private ServletContext servletContext;
 
 	@GetMapping("/{filename}")
-	public ResponseEntity<ByteArrayResource> downloadFile2(@PathVariable("filename") String filename)
+	public ResponseEntity<ByteArrayResource> downloadTemplate(@PathVariable("filename") String filename)
 			throws IOException {
 		MediaType mediaType = getMediaTypeForFileName(this.servletContext, filename);
 		System.out.println("mediaType: " + mediaType);
