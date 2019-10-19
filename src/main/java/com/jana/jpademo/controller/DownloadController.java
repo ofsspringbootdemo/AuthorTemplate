@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jana.jpademo.common.TemplateConstant;
-
 @RestController
 @RequestMapping("/templateDownload")
 public class DownloadController {
@@ -26,12 +24,12 @@ public class DownloadController {
 	@Autowired
 	private ServletContext servletContext;
 
-	@GetMapping("/{filename}")
+	@GetMapping
 	public ResponseEntity<ByteArrayResource> downloadFile2(@PathVariable("filename") String filename)
 			throws IOException {
 		MediaType mediaType = getMediaTypeForFileName(this.servletContext, filename);
 		System.out.println("mediaType: " + mediaType);
-		Path path = Paths.get(TemplateConstant.file_location + filename);
+		Path path = Paths.get("D:/download/" + filename);
 		byte[] data = Files.readAllBytes(path);
 		ByteArrayResource resource = new ByteArrayResource(data);
 		return ResponseEntity.ok()
