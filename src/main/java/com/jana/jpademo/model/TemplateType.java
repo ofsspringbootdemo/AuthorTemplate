@@ -43,7 +43,7 @@ public class TemplateType {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "TEMPLATE_TYPE_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value="template-type-file-downloads")
     private List<FileDownload> fileDownloadList;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -48,7 +48,7 @@ public class ArticleType {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "ARTICLE_TYPE_ID")
-    @JsonManagedReference
+    @JsonManagedReference(value="article-type-file-downloads")
     private List<FileDownload> fileDownloadList;
 
     public Long getId() {

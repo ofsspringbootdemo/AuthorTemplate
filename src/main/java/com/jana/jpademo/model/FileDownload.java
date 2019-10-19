@@ -26,15 +26,15 @@ public class FileDownload {
     private String descriptiveText;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value="template-type-file-downloads")
     private TemplateType templateType;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value="template-name-file-downloads")
     private TemplateName templateName;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference(value="article-type-file-downloads")
     private ArticleType articleType;
 
     public Long getId() {
