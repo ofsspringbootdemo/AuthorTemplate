@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jana.jpademo.common.TemplateConstant;
 import com.jana.jpademo.model.FileDownload;
+import com.jana.jpademo.model.TemplateName;
 import com.jana.jpademo.service.ArticleTypeService;
 import com.jana.jpademo.service.FileDownloadService;
 import com.jana.jpademo.service.TemplateNameService;
@@ -29,6 +32,11 @@ public class TemplateController {
 
 	@Autowired
 	private FileDownloadService fileDownloadService;
+
+	@PutMapping
+	public void updateTemplateName(@RequestBody TemplateName templateName) {
+		templateNameService.updateTemplateName(templateName);
+	}
 
 	@GetMapping
 	public AuthTemplateVO getTemplateDetails(@RequestParam(required = false) String templateTypeID,

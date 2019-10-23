@@ -1,7 +1,8 @@
 package com.jana.jpademo.repository;
 
-import com.jana.jpademo.model.TemplateType;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jana.jpademo.model.TemplateType;
 
 /**
  * Created by Jana on 10/14/2019.
