@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ArticleTypeRepository extends JpaRepository<ArticleType, Long> {
 
-	List<ArticleType> getByPublicationTitleId(Long id);
+    List<ArticleType> getByPublicationTitleId(Long id);
 }

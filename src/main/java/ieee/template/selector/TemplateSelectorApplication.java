@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TemplateSelectorApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TemplateSelectorApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TemplateSelectorApplication.class, args);
+    }
 }
