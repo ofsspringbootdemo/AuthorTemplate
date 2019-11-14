@@ -28,6 +28,11 @@ public class PublicationTypeService {
         return repository.findById(id);
     }
 
+    /**
+     * Method to get PublicationType Details.
+     *
+     * @return List of PublicationType
+     */
     public List<PublicationType> getAllPublicationType() {
 
         try {

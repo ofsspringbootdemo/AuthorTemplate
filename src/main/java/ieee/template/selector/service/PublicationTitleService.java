@@ -36,6 +36,12 @@ public class PublicationTitleService {
         repository.deleteById(id);
     }
 
+    /**
+     * Method to get PublicationTitle Details using PublicationTypeId.
+     *
+     * @param id of PublicationTypeId
+     * @return List of PublicationTitle
+     */
     public List<PublicationTitle> getPublicationTitlesByPublicationTypeId(Long id) {
 
         try {

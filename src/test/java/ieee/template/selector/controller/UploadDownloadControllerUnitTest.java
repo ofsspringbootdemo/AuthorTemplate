@@ -1,41 +1,39 @@
 package ieee.template.selector.controller;
 
-import java.io.IOException;
-
+import ieee.template.selector.service.UploadDownloadService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import ieee.template.selector.TemplateSelectorApplicationTests;
-import ieee.template.selector.service.UploadDownloadService;
+import java.io.IOException;
 
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class UploadDownloadControllerUnitTest extends TemplateSelectorApplicationTests {
 
-	@Mock
-	private UploadDownloadService mockArticleTypeService;
+@RunWith(MockitoJUnitRunner.class)
+public class UploadDownloadControllerUnitTest {
 
-	@InjectMocks
-	private UploadDownloadController mockController;
+    @Mock
+    private UploadDownloadService mockService;
 
-	@Before
-	public void setup() throws IOException {
-		ResponseEntity response = new ResponseEntity(HttpStatus.ACCEPTED);
-		response.ok();
-		Mockito.when(mockArticleTypeService.fileDownload(2L)).thenReturn(response);
-	}
+    @InjectMocks
+    private UploadDownloadController mockUploadDownload;
 
-	@Test
-	public void testArticleType() throws Exception {
-		ResponseEntity response = mockController.downloadTemplate(2L);
-		Mockito.verify(mockArticleTypeService, Mockito.times(1)).fileDownload(2L);
-	}
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Before
+    public void setup() throws IOException {
+        ResponseEntity response = new ResponseEntity(HttpStatus.ACCEPTED);
+        Mockito.when(mockService.fileDownload(5L)).thenReturn(response);
+    }
+
+    @Test
+    public void testDownloadService() throws Exception {
+        mockUploadDownload.downloadTemplate(5L);
+        Mockito.verify(mockService, Mockito.times(1)).fileDownload(5L);
+    }
+
 }

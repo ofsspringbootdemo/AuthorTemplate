@@ -10,6 +10,13 @@ import java.util.ArrayList;
 
 @Service
 public class TemplateJwtUserDetailsService implements UserDetailsService {
+
+    /**
+     * Methods to get userDetails for authentication.
+     *
+     * @param username of userDetails
+     * @return userDetails
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if ("javainuse".equals(username)) {

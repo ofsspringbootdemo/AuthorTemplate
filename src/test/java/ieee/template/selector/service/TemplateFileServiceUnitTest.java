@@ -1,53 +1,83 @@
 package ieee.template.selector.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ieee.template.selector.model.TemplateFile;
+import ieee.template.selector.repository.TemplateFileRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import ieee.template.selector.TemplateSelectorApplicationTests;
-import ieee.template.selector.model.TemplateFile;
-import ieee.template.selector.repository.TemplateFileRepository;
-import junit.framework.Assert;
+import java.util.Arrays;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-@Service
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class TemplateFileServiceUnitTest extends TemplateSelectorApplicationTests {
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-	@Mock
-	private TemplateFileRepository mockRepository;
 
-	@InjectMocks
-	private TemplateFileService mockService;
+@RunWith(MockitoJUnitRunner.class)
+public class TemplateFileServiceUnitTest {
 
-	List<TemplateFile> list = new ArrayList<>();
-	TemplateFile templateFile = new TemplateFile();
+    @Mock
+    private TemplateFileRepository mockRepository;
 
-	@Before
-	public void setup() {
-		templateFile.setId(3L);
-		templateFile.setFormat("Latex");
-		templateFile.setName("Template for Conference.zip");
-		templateFile.setStatus("Active");
-		list.add(templateFile);
-		Mockito.when(mockRepository.getByPublicationTypeId(3L)).thenReturn(list);
-	}
+    @InjectMocks
+    private TemplateFileService mockService;
 
-	@Test
-	public void testArticleType() throws Exception {
-		List<TemplateFile> templateFiles = mockService.getTemplateFilesByPublicationTypeId(3L);
-		System.out.println("articleTypes" + templateFiles);
-		Assert.assertEquals(list, templateFiles);
-		Mockito.verify(mockRepository, Mockito.times(1)).getByPublicationTypeId(3L);
-	}
+    @Before
+    public void setup() {
+        Mockito.when(mockRepository.getByPublicationTypeId(5L)).thenReturn(constructTemplateFile());
+        Mockito.when(mockRepository.getByArticleTypeId(5L)).thenReturn(constructTemplateFile());
+        Mockito.when(mockRepository.getByPublicationTitleId(5L)).thenReturn(constructTemplateFile());
+    }
+
+    @Test
+    public void testTemplateFileByArticleType() throws Exception {
+        mockService.getTemplateFilesByArticleTypeId(5L);
+        verify(mockRepository, times(1)).getByArticleTypeId(5L);
+    }
+
+    @Test
+    public void testTemplateFileByArticleTypeNull() {
+        Mockito.when(mockRepository.getByArticleTypeId(5L)).thenReturn(null);
+        mockService.getTemplateFilesByArticleTypeId(5L);
+        verify(mockRepository, times(1)).getByArticleTypeId(5L);
+    }
+
+    @Test
+    public void testTemplateFileByPublicationTitle() throws Exception {
+        mockService.getTemplateFilesByPublicationTitleId(5L);
+        verify(mockRepository, times(1)).getByPublicationTitleId(5L);
+    }
+
+    @Test
+    public void testTemplateFileByPublicationTitleNull() {
+        Mockito.when(mockRepository.getByPublicationTitleId(5L)).thenReturn(null);
+        mockService.getTemplateFilesByPublicationTitleId(5L);
+        verify(mockRepository, times(1)).getByPublicationTitleId(5L);
+    }
+
+    @Test
+    public void testTemplateFileByPublicationType() throws Exception {
+        mockService.getTemplateFilesByPublicationTypeId(5L);
+        verify(mockRepository, times(1)).getByPublicationTypeId(5L);
+    }
+
+    @Test
+    public void testTemplateFileByPublicationTypeNull() {
+        Mockito.when(mockRepository.getByPublicationTypeId(5L)).thenReturn(null);
+        mockService.getTemplateFilesByPublicationTypeId(5L);
+        verify(mockRepository, times(1)).getByPublicationTypeId(5L);
+    }
+
+    private List<TemplateFile> constructTemplateFile() {
+        TemplateFile templateFile = new TemplateFile();
+        templateFile.setId(3L);
+        templateFile.setFormat("Latex");
+        templateFile.setName("Template for Conference.zip");
+        templateFile.setStatus("Active");
+        return Arrays.asList(templateFile);
+    }
 }

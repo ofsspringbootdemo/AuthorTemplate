@@ -36,6 +36,12 @@ public class ArticleTypeService {
         repository.deleteById(id);
     }
 
+    /**
+     * Method to get Article Type Details using publication TitleId.
+     *
+     * @param id of PublicationTitleId
+     * @return List of Article Type
+     */
     public List<ArticleType> getArticleTypesByPublicationTitleId(Long id) {
         try {
             List<ArticleType> articleTypes = repository.getByPublicationTitleId(id);

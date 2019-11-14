@@ -1,50 +1,55 @@
 package ieee.template.selector.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ieee.template.selector.model.PublicationTitle;
+import ieee.template.selector.service.PublicationTitleService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import ieee.template.selector.TemplateSelectorApplicationTests;
-import ieee.template.selector.model.PublicationTitle;
-import ieee.template.selector.service.PublicationTitleService;
-import junit.framework.Assert;
+import java.util.Arrays;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class PublicationTitleControllerUnitTest extends TemplateSelectorApplicationTests {
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
-	@Mock
-	private PublicationTitleService mockPublicationTitleService;
 
-	@InjectMocks
-	private PublicationTitleController mockController;
+@RunWith(MockitoJUnitRunner.class)
+public class PublicationTitleControllerUnitTest {
 
-	List<PublicationTitle> list = new ArrayList<>();
-	PublicationTitle publicationTitle = new PublicationTitle();
+    @Mock
+    private PublicationTitleService mockPublicationTitleService;
 
-	@Before
-	public void setup() {
-		publicationTitle.setId(3L);
-		publicationTitle.setName("IEEE Journal of Quantum Electronics");
-		publicationTitle.setDescription("Template type to publish new Journal");
-		list.add(publicationTitle);
-		Mockito.when(mockPublicationTitleService.getPublicationTitlesByPublicationTypeId(3L)).thenReturn(list);
-	}
+    @InjectMocks
+    private PublicationTitleController mockController;
 
-	@Test
-	public void testArticleType() throws Exception {
-		List<PublicationTitle> publicationTitles = mockController.getPublicationTitlesByPublicationTypeId(3L);
-		System.out.println("publicationTitles" + publicationTitles);
-		Assert.assertEquals(list, publicationTitles);
-		Mockito.verify(mockPublicationTitleService, Mockito.times(1)).getPublicationTitlesByPublicationTypeId(3L);
-	}
+    @Before
+    public void setup() {
+        Mockito.when(mockPublicationTitleService.getPublicationTitlesByPublicationTypeId(anyLong()))
+                .thenReturn(constructPublicationTitle());
+    }
+
+    @Test
+    public void testPublicationTitle() throws Exception {
+        mockController.getPublicationTitlesByPublicationTypeId(5L);
+        verify(mockPublicationTitleService, times(1)).getPublicationTitlesByPublicationTypeId(5L);
+    }
+
+    @Test
+    public void testPublicationTitleNull() {
+        when(mockPublicationTitleService.getPublicationTitlesByPublicationTypeId(anyLong())).thenReturn(null);
+        mockController.getPublicationTitlesByPublicationTypeId(5L);
+        verify(mockPublicationTitleService, times(1)).getPublicationTitlesByPublicationTypeId(5L);
+    }
+
+    private List<PublicationTitle> constructPublicationTitle() {
+        PublicationTitle publicationTitle = new PublicationTitle();
+        publicationTitle.setId(5L);
+        publicationTitle.setName("IEEE Journal of Quantum Electronics");
+        publicationTitle.setDescription("Template type to publish new Journal");
+        return Arrays.asList(publicationTitle);
+    }
 }

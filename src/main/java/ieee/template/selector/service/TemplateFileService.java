@@ -36,6 +36,12 @@ public class TemplateFileService {
         repository.deleteById(id);
     }
 
+    /**
+     * Method to get TemplateFile Details using publicationTypeId.
+     *
+     * @param id of PublicationType
+     * @return List of TemplateFile
+     */
     public List<TemplateFile> getTemplateFilesByPublicationTypeId(Long id) {
 
         try {
@@ -48,6 +54,12 @@ public class TemplateFileService {
         return null;
     }
 
+    /**
+     * Method to get TemplateFile Details using publicationTitleId.
+     *
+     * @param id of publicationTitleId
+     * @return List of TemplateFile
+     */
     public List<TemplateFile> getTemplateFilesByPublicationTitleId(Long id) {
 
         try {
@@ -60,6 +72,12 @@ public class TemplateFileService {
         return null;
     }
 
+    /**
+     * Method to get TemplateFile Details using ArticleTypeId.
+     *
+     * @param id of ArticleTypeId
+     * @return List of TemplateFile
+     */
     public List<TemplateFile> getTemplateFilesByArticleTypeId(Long id) {
 
         try {

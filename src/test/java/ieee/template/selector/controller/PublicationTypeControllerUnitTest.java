@@ -1,50 +1,46 @@
 package ieee.template.selector.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ieee.template.selector.model.PublicationType;
+import ieee.template.selector.service.PublicationTypeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import ieee.template.selector.TemplateSelectorApplicationTests;
-import ieee.template.selector.model.PublicationType;
-import ieee.template.selector.service.PublicationTypeService;
-import junit.framework.Assert;
+import java.util.Arrays;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class PublicationTypeControllerUnitTest extends TemplateSelectorApplicationTests {
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-	@Mock
-	private PublicationTypeService publicationTypeService;
+@RunWith(MockitoJUnitRunner.class)
+public class PublicationTypeControllerUnitTest {
 
-	@InjectMocks
-	private PublicationTypeController mockController;
+    @Mock
+    private PublicationTypeService publicationTypeService;
 
-	List<PublicationType> list = new ArrayList<>();
-	PublicationType publicationType = new PublicationType();
+    @InjectMocks
+    private PublicationTypeController mockController;
 
-	@Before
-	public void setup() {
-		publicationType.setId(3L);
-		publicationType.setName("Transactions, Journals and Letters");
-		publicationType.setDescription("Template type to publish new Journal");
-		list.add(publicationType);
-		Mockito.when(publicationTypeService.getAllPublicationType()).thenReturn(list);
-	}
+    @Before
+    public void setup() {
+        Mockito.when(publicationTypeService.getAllPublicationType()).thenReturn(constructpublicationType());
+    }
 
-	@Test
-	public void testArticleType() throws Exception {
-		List<PublicationType> publicationTypes = mockController.getPublicationTypes();
-		System.out.println("publicationTypes" + publicationTypes);
-		Assert.assertEquals(list, publicationTypes);
-		Mockito.verify(publicationTypeService, Mockito.times(1)).getAllPublicationType();
-	}
+    @Test
+    public void testPublicationType() throws Exception {
+        mockController.getPublicationTypes();
+        verify(publicationTypeService, times(1)).getAllPublicationType();
+    }
+
+    private List<PublicationType> constructpublicationType() {
+        PublicationType publicationType = new PublicationType();
+        publicationType.setId(3L);
+        publicationType.setName("Transactions, Journals and Letters");
+        publicationType.setDescription("Template type to publish new Journal");
+        return Arrays.asList(publicationType);
+    }
 }

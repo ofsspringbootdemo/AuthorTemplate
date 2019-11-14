@@ -1,39 +1,34 @@
 package ieee.template.selector.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ieee.template.selector.model.ArticleType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import ieee.template.selector.controller.ArticleTypeController;
-import ieee.template.selector.model.ArticleType;
+import java.util.ArrayList;
+import java.util.List;
 
-@Service
-@SpringBootTest
-@RunWith(SpringRunner.class)
+
+@RunWith(MockitoJUnitRunner.class)
 public class UploadDownloadServiceUnitTest {
 
-	@Mock
-	private ArticleTypeService mockArticleTypeService;
+    @Mock
+    private ArticleTypeService mockArticleTypeService;
 
-	@InjectMocks
-	private ArticleTypeController mockController;
+    @InjectMocks
+    private TemplateFileService templateFileService;
 
-	List<ArticleType> list = new ArrayList<>();
-	ArticleType articleType = new ArticleType();
+    List<ArticleType> list = new ArrayList<>();
+    ArticleType articleType = new ArticleType();
 
-	@Before
-	public void setup() {
-	}
+    @Before
+    public void setup() {
+    }
 
-	@Test
-	public void testArticleType() throws Exception {
-	}
+    @Test
+    public void testArticleType() throws Exception {
+    }
 }

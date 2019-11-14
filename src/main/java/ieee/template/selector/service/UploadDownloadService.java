@@ -31,6 +31,12 @@ public class UploadDownloadService {
     @Autowired
     private TemplateFileService templateFileService;
 
+    /**
+     * Methods to upload the template file.
+     *
+     * @param files file list to upload
+     * @return response as success
+     */
     public static ResponseEntity<String> fileUpload(MultipartFile[] files) {
         for (MultipartFile uploadedFile : files) {
             if (uploadedFile.isEmpty()) {
@@ -47,14 +53,19 @@ public class UploadDownloadService {
         return ResponseEntity.ok(TemplateConstant.sucMsg);
     }
 
+    /**
+     * Methods to download the template files.
+     *
+     * @param fileId file id to download
+     * @return files
+     * @throws IOException throws exception if file not available
+     */
     public ResponseEntity<?> fileDownload(Long fileId) throws IOException {
 
         Optional<TemplateFile> templateFile = templateFileService.getTemplateFileById(fileId);
         if (!templateFile.isPresent()) {
             LOGGER.error("Invalid File Id={}", fileId);
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Invalid request");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request");
         }
 
         String fileName = templateFile.get().getName();
@@ -63,16 +74,11 @@ public class UploadDownloadService {
         try {
             byte[] data = Files.readAllBytes(path);
             ByteArrayResource resource = new ByteArrayResource(data);
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName)
-                    .contentType(mediaType)
-                    .contentLength(data.length)
-                    .body(resource);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName)
+                    .contentType(mediaType).contentLength(data.length).body(resource);
         } catch (IOException e) {
             LOGGER.error("Template File Not found ", e);
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("File not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found");
         }
     }
 

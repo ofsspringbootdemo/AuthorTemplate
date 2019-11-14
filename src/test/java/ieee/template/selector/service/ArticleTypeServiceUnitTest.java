@@ -1,51 +1,55 @@
 package ieee.template.selector.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import ieee.template.selector.model.ArticleType;
+import ieee.template.selector.repository.ArticleTypeRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import ieee.template.selector.TemplateSelectorApplicationTests;
-import ieee.template.selector.model.ArticleType;
-import ieee.template.selector.repository.ArticleTypeRepository;
-import junit.framework.Assert;
+import java.util.Arrays;
+import java.util.List;
 
-@SuppressWarnings("deprecation")
-@Service
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class ArticleTypeServiceUnitTest extends TemplateSelectorApplicationTests {
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
-	@Mock
-	private ArticleTypeRepository repository;
 
-	@InjectMocks
-	private ArticleTypeService mockService;
+@RunWith(MockitoJUnitRunner.class)
+public class ArticleTypeServiceUnitTest {
 
-	List<ArticleType> list = new ArrayList<>();
-	ArticleType articleType = new ArticleType();
+    @Mock
+    private ArticleTypeRepository repository;
 
-	@Before
-	public void setup() {
-		articleType.setId(3L);
-		articleType.setName("Original Research");
-		list.add(articleType);
-		Mockito.when(repository.getByPublicationTitleId(5L)).thenReturn(list);
-	}
+    @InjectMocks
+    private ArticleTypeService mockService;
 
-	@Test
-	public void testArticleType() throws Exception {
-		List<ArticleType> articleTypes = mockService.getArticleTypesByPublicationTitleId(5L);
-		System.out.println("articleTypes" + articleTypes);
-		Assert.assertEquals(list, articleTypes);
-		Mockito.verify(repository, Mockito.times(1)).getByPublicationTitleId(5L);
-	}
+    @Before
+    public void setup() {
+        when(repository.getByPublicationTitleId(5L)).thenReturn(constructArticleType());
+    }
+
+    @Test
+    public void testArticleTypeService() throws Exception {
+        mockService.getArticleTypesByPublicationTitleId(5L);
+        verify(repository, times(1)).getByPublicationTitleId(5L);
+    }
+
+    @Test
+    public void testArticleTypeServiceNull() {
+        when(repository.getByPublicationTitleId(anyLong())).thenReturn(null);
+        mockService.getArticleTypesByPublicationTitleId(5L);
+        Mockito.verify(repository, Mockito.times(1)).getByPublicationTitleId(5L);
+    }
+
+    private List<ArticleType> constructArticleType() {
+        ArticleType articleType = new ArticleType();
+        articleType.setId(3L);
+        articleType.setName("Original Research");
+        articleType.setStatus("Active");
+
+        return Arrays.asList(articleType);
+    }
 }
